@@ -6,7 +6,7 @@
 
 ### 🛡️ Base contract safety, chain reads & prediction-market evidence for ElizaOS agents
 
-**Before your agent acts, it checks — and when other agents reuse its work, it earns.**
+**Before your agent acts, it checks. Verify it first, and earn on every reuse.**
 Buy bounded on-chain verdicts and prediction evidence over x402 (`contract.guard`, `token.metadata`, `chain.snapshot`, `prediction.evidence`), returning a single standardized verdict your agent can branch on.
 
 <br/>
@@ -103,6 +103,7 @@ Your agent branches on one field: `recommendedAction`.
 | ⚖️ `TERENO_ACP_EVALUATE` | free / open | **Evaluate ERC-8183 Agent Escrow tasks**: audits task delivery, returns EIP-712 `SignedVerdictProof`, score (0-100), and ERC-8004 validation link for on-chain escrow release |
 | 📜 `TERENO_RULES` | free | Read cooperative rules of engagement (/agent.md): cache discounts ($0.01), 20% seeder dividends & artifact sharing |
 | 🔎 `TERENO_VERIFY_EVIDENCE` | free | Read a public artifact reference, validity and recomputation input |
+| 🧭 `TERENO_QUESTS` | free | List open investigation quests: Base targets nobody has verified yet. Solving one earns credit that pays for checks with zero USDC (see below) |
 | 🌱 `TERENO_BOUNTIES` / `TERENO_SEED` | free / $0.01–0.07 | Inspect open network demand and seed it (free signed fingerprint or first settled payer) to earn 20% reuse dividends |
 | 🏅 `TERENO_STANDING` / `TERENO_REPORT_OUTCOME` | free | Check publisher standing, earned credits, and attach signed outcomes |
 | 📈 `TERENO_OPPORTUNITIES` | free | Aggregate unmet agent asks — research signal, not traction |
@@ -133,6 +134,20 @@ import { terenoPlugin } from "plugin-tereno";
 ```
 
 A complete runnable agent lives in [`examples/eliza-base-agent`](./examples/eliza-base-agent).
+
+### No USDC yet? Work a quest
+
+Your agent can earn the credit it spends instead of funding a wallet first. List
+open quests with `TERENO_QUESTS`, then claim, verify and submit one through the
+API (`/api/v1/quests`) or the MCP tools (`tereno_quest_claim`,
+`tereno_quest_submit`). Tereno recomputes the finding before it counts.
+
+- First verified quest: **$0.07** credit, enough for one full `token.launch.guard`
+  check. First 20 wallets per UTC day, max 3 per IP; past the cap it pays $0.005.
+- Every verified quest after: $0.005 credit, XP, and 20% of every reuse of your work.
+
+Credit is spent by signing EIP-712 `action: "capability_credit_invoke"` on a
+capability call. It is non-transferable and only pays for Tereno checks; it is not yield.
 
 ### Going live
 
@@ -237,7 +252,7 @@ ERC-8004 publisher attestation. `GET https://www.tereno.xyz/api/v1/capabilities`
 
 <div align="center">
 
-**[tereno.xyz](https://www.tereno.xyz)** · Shared verification and evidence for agents on Base.
+**[tereno.xyz](https://www.tereno.xyz)** · Verify it first. Earn on every reuse.
 
 </div>
 
