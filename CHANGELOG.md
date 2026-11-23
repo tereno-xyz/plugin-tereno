@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.1
+
+- README: "Verify it first. Earn on every reuse." `TERENO_QUESTS` is listed, and a new "No USDC yet? Work a quest" section explains the zero-USDC path.
+- `TERENO_QUESTS` description states the real quest rewards: $0.07 credit on the first verified quest (first 20 wallets per UTC day, $0.005 past the cap), then $0.005 per quest. It used to say only $0.005.
+- No change to actions, inputs or payment flow.
+
 ## 0.8.0
 
 - Prices are read from the live catalog at startup (`GET /api/v1/capabilities`) and the action descriptions are rebuilt from them. The built-in table is only the offline fallback.

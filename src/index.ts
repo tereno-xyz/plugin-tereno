@@ -198,7 +198,7 @@ export function failVerdict(reason: string, financial: boolean): TerenoVerdict {
 // ————— Anonymous telemetry (issues #9/#10) —————
 // Opt-out (TERENO_TELEMETRY=off). STRICT allowlist below — this is the ONLY
 // data ever transmitted. Never the private key, prompt, secrets or tx content.
-export const PLUGIN_VERSION = "0.8.0";
+export const PLUGIN_VERSION = "0.8.1";
 
 function telemetryEnabled(): boolean {
   return env("TERENO_TELEMETRY").toLowerCase() !== "off";
@@ -1010,7 +1010,7 @@ const questsAction: Action = {
   name: "TERENO_QUESTS",
   similes: ["GRIFOS_QUESTS", "INVESTIGATION_QUESTS", "LIST_QUESTS"],
   description:
-    "List open Γρίφος investigation quests on the Tereno Investigation Network (contract_investigation and prediction_audit). Free. Verified contributions earn XP, $0.005 credits, 5 free Context Graph reads, and 20% reuse dividends.",
+    "List open Γρίφος investigation quests on the Tereno Investigation Network (contract_investigation and prediction_audit). Free. No USDC needed: your first verified quest earns $0.07 credit (enough for one full token.launch.guard check; first 20 wallets per UTC day, $0.005 past the cap), then $0.005 per quest, XP, 5 free Context Graph reads and 20% of every reuse of your work. Credit pays for checks with zero USDC; it is not yield.",
   validate: async () => true,
   handler: async (
     _runtime: IAgentRuntime,
